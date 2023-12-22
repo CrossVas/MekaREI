@@ -3,3 +3,5 @@
 [x] Add click areas
 
 [x] Add exclusion zones
+
+[x] Add crafting handlers
