@@ -1,0 +1,23 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="All rights reserved"
+[[mods]]
+modId="mekarei"
+version="${file.jarVersion}"
+displayName="REI Plugins - Mekanism"
+authors="CrossVas" #optional
+description='''
+Compat layer between Reoughly Enough Items and Mekanism.
+'''
+[[dependencies.mekarei]]
+modId="roughlyenoughitems"
+mandatory=true
+versionRange="[9.1.663,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.mekarei]]
+modId="mekanism"
+mandatory=true
+versionRange="[1.19.2-10.3.9.13,)"
+ordering="AFTER"
+side="BOTH"

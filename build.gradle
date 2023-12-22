@@ -1,0 +1,162 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven {
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+            content { includeGroup "org.spongepowered" }
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+}
+
+version = project.mod_version
+group = 'dev.crossvas.mods'
+archivesBaseName = project.modid
+
+// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+minecraft {
+    mappings channel: 'parchment', version: '2022.08.14-1.19.2'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'examplemod'
+
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'examplemod'
+
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        gameTestServer {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'examplemod'
+
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                examplemod {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+
+    maven { url "https://maven.shedaniel.me" }
+    maven { url "https://maven.architectury.dev" }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.19.2-43.3.0'
+
+    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:8.3.103")
+    implementation fg.deobf("dev.architectury:architectury-forge:6.5.85")
+
+    implementation fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:9.1.668")
+
+//    implementation fg.deobf("curse.maven:jei-238222:4712866")
+    implementation fg.deobf("curse.maven:mekanism-268560:4644795")
+}
+
+// Example for how to get properties into the manifest for reading at runtime.
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "examplemod",
+                "Specification-Vendor"    : "examplemodsareus",
+                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "examplemodsareus",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
