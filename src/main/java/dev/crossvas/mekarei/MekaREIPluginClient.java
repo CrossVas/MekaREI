@@ -3,6 +3,7 @@ package dev.crossvas.mekarei;
 import dev.architectury.fluid.FluidStack;
 import dev.crossvas.mekarei.categories.*;
 import dev.crossvas.mekarei.displays.*;
+import dev.crossvas.mekarei.handlers.ExclusionZoneHandler;
 import dev.crossvas.mekarei.handlers.FormulaicAssemblicatorTransferHandler;
 import dev.crossvas.mekarei.handlers.QIODashboardTransferHandler;
 import dev.crossvas.mekarei.utils.Categories;
@@ -12,6 +13,7 @@ import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
+import me.shedaniel.rei.api.client.registry.screen.ExclusionZones;
 import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.TransferHandlerRegistry;
 import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandler;
@@ -23,6 +25,7 @@ import me.shedaniel.rei.api.common.util.EntryStacks;
 import me.shedaniel.rei.forge.REIPluginClient;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
 import mekanism.api.MekanismAPI;
+import mekanism.client.gui.GuiMekanism;
 import mekanism.common.content.blocktype.FactoryType;
 import mekanism.common.inventory.container.entity.robit.RobitContainer;
 import mekanism.common.recipe.MekanismRecipeType;
@@ -195,8 +198,8 @@ public class MekaREIPluginClient implements REIClientPlugin {
     }
 
     @Override
-    public void registerScreens(ScreenRegistry registry) {
-
+    public void registerExclusionZones(ExclusionZones zones) {
+        zones.register(GuiMekanism.class, new ExclusionZoneHandler());
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
