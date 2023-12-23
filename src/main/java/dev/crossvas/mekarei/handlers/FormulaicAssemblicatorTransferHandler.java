@@ -14,6 +14,7 @@ import net.minecraft.world.inventory.Slot;
 
 import java.util.List;
 
+@SuppressWarnings("UnstableApiUsage")
 public class FormulaicAssemblicatorTransferHandler implements SimpleTransferHandler {
 
     @Override
