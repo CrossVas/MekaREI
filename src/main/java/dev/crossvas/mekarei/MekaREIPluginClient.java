@@ -3,6 +3,8 @@ package dev.crossvas.mekarei;
 import dev.architectury.fluid.FluidStack;
 import dev.crossvas.mekarei.categories.*;
 import dev.crossvas.mekarei.displays.*;
+import dev.crossvas.mekarei.handlers.FormulaicAssemblicatorTransferHandler;
+import dev.crossvas.mekarei.handlers.QIODashboardTransferHandler;
 import dev.crossvas.mekarei.utils.Categories;
 import dev.crossvas.mekarei.utils.MekanismEntryTypes;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
@@ -10,6 +12,9 @@ import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.client.registry.entry.EntryRegistry;
+import me.shedaniel.rei.api.client.registry.screen.ScreenRegistry;
+import me.shedaniel.rei.api.client.registry.transfer.TransferHandlerRegistry;
+import me.shedaniel.rei.api.client.registry.transfer.simple.SimpleTransferHandler;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
@@ -19,6 +24,7 @@ import me.shedaniel.rei.forge.REIPluginClient;
 import me.shedaniel.rei.plugin.common.BuiltinPlugin;
 import mekanism.api.MekanismAPI;
 import mekanism.common.content.blocktype.FactoryType;
+import mekanism.common.inventory.container.entity.robit.RobitContainer;
 import mekanism.common.recipe.MekanismRecipeType;
 import mekanism.common.registration.impl.FluidDeferredRegister;
 import mekanism.common.registries.MekanismBlocks;
@@ -173,6 +179,19 @@ public class MekaREIPluginClient implements REIClientPlugin {
         RECIPES.getAllRecipesFor(MekanismRecipeType.ACTIVATING.get()).forEach(recipe -> registry.add(new SolarNeutronDisplay(recipe)));
         SPSCategory.getSPSRecipes().forEach(recipe -> registry.add(new SPSDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.EVAPORATING.get()).forEach(recipe -> registry.add(new ThermalEvaporationDisplay(recipe)));
+    }
+
+    @Override
+    public void registerTransferHandlers(TransferHandlerRegistry registry) {
+        registry.register(new FormulaicAssemblicatorTransferHandler());
+        registry.register(new QIODashboardTransferHandler());
+        SimpleTransferHandler simpleTransferHandler = SimpleTransferHandler.create(RobitContainer.class, BuiltinPlugin.CRAFTING, new SimpleTransferHandler.IntRange(1, 10));
+        registry.register(simpleTransferHandler);
+    }
+
+    @Override
+    public void registerScreens(ScreenRegistry registry) {
+
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
