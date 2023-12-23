@@ -28,8 +28,10 @@ import mekanism.common.inventory.container.entity.robit.RobitContainer;
 import mekanism.common.recipe.MekanismRecipeType;
 import mekanism.common.registration.impl.FluidDeferredRegister;
 import mekanism.common.registries.MekanismBlocks;
+import mekanism.common.registries.MekanismItems;
 import mekanism.common.tier.FactoryTier;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -77,6 +79,9 @@ public class MekaREIPluginClient implements REIClientPlugin {
                 MekanismBlocks.ENERGIZED_SMELTER.getBlock(),
                 FactoryType.SMELTING
         );
+        addWorkstations(registry, BuiltinPlugin.CRAFTING, MekanismBlocks.FORMULAIC_ASSEMBLICATOR.getBlock());
+        addWorkstations(registry, BuiltinPlugin.CRAFTING, MekanismItems.ROBIT.asItem());
+        addWorkstations(registry, BuiltinPlugin.SMELTING, MekanismItems.ROBIT.asItem());
         addCat(registry, Categories.ANTIPROTONIC_SYNTH, new AntiprotonicSynthesizerCategory(), MekanismBlocks.ANTIPROTONIC_NUCLEOSYNTHESIZER.getBlock());
         addCat(registry, Categories.METAL_INFUSING, new MetallurgicInfuserCategory(),
                 MekanismBlocks.METALLURGIC_INFUSER.getBlock(),
@@ -221,6 +226,11 @@ public class MekaREIPluginClient implements REIClientPlugin {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static void addWorkstations(CategoryRegistry r, CategoryIdentifier id, Block... stations) {
+        Arrays.stream(stations).forEach(station -> r.addWorkstations(id, EntryStacks.of(station)));
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static void addWorkstations(CategoryRegistry r, CategoryIdentifier id, Item... stations) {
         Arrays.stream(stations).forEach(station -> r.addWorkstations(id, EntryStacks.of(station)));
     }
 }
