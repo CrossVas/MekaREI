@@ -1,2 +1,2 @@
-[x] Add click areas
+[x] Add click areas - help needed
 
