@@ -56,10 +56,7 @@ public class QIODashboardTransferHandler implements TransferHandler {
                     if (context.getMenu() instanceof QIOItemViewerContainer container) {
                         byte selectedCraftingGrid = container.getSelectedCraftingGrid();
                         if (selectedCraftingGrid >= 0) {
-                            if (context.isActuallyCrafting()) {
-                                return this.transferRecipe(craftingDisplay, container, recipe, context.getMinecraft().player, context.isStackedCrafting(), context.isActuallyCrafting());
-                            }
-                            return Result.createSuccessful();
+                            return this.transferRecipe(craftingDisplay, container, recipe, context.getMinecraft().player, context.isStackedCrafting(), context.isActuallyCrafting());
                         }
                     }
                 }
@@ -87,7 +84,7 @@ public class QIODashboardTransferHandler implements TransferHandler {
                 }
             }
             if (recipe.matches(dummy, player.level)) {
-                return null;
+                return Result.createNotApplicable();
             }
         }
         final List<EntryIngredient> ingredients = ((DefaultCraftingDisplay<?>) display).getOrganisedInputEntries(3, 3);
@@ -228,6 +225,7 @@ public class QIODashboardTransferHandler implements TransferHandler {
             }
             if (doTransfer) {
                 Mekanism.packetHandler().sendToServer(new PacketQIOFillCraftingWindow(recipe.getId(), maxTransfer, sources));
+                return Result.createSuccessful();
             }
         }
         return Result.createSuccessful();
