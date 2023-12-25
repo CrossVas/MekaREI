@@ -1,6 +1,5 @@
 package dev.crossvas.mekarei.displays;
 
-import dev.crossvas.mekarei.utils.Categories;
 import dev.crossvas.mekarei.utils.MekanismEntryTypes;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
@@ -9,17 +8,19 @@ import mekanism.api.recipes.GasToGasRecipe;
 
 import java.util.List;
 
-public class SolarNeutronDisplay extends BasicDisplay {
+public class GasToGasRecipeDisplay extends BasicDisplay {
 
     GasToGasRecipe RECIPE;
+    CategoryIdentifier<?> ID;
 
-    public SolarNeutronDisplay(GasToGasRecipe recipe) {
+    public GasToGasRecipeDisplay(GasToGasRecipe recipe, CategoryIdentifier<?> id) {
         this(List.of(MekanismEntryTypes.gases(recipe.getInput().getRepresentations())),
                 List.of(MekanismEntryTypes.gases(recipe.getOutputDefinition())));
         this.RECIPE = recipe;
+        this.ID = id;
     }
 
-    public SolarNeutronDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+    public GasToGasRecipeDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
         super(inputs, outputs);
     }
 
@@ -29,6 +30,6 @@ public class SolarNeutronDisplay extends BasicDisplay {
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return Categories.SOLAR_NEUTRON;
+        return this.ID;
     }
 }

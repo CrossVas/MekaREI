@@ -1,6 +1,6 @@
 package dev.crossvas.mekarei.categories;
 
-import dev.crossvas.mekarei.displays.ChemicalOxidizerDisplay;
+import dev.crossvas.mekarei.displays.ItemStackToGasRecipeDisplay;
 import dev.crossvas.mekarei.utils.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.shedaniel.math.Rectangle;
@@ -15,10 +15,10 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class ChemicalOxidizerCategory implements DisplayCategory<ChemicalOxidizerDisplay>, IGuiHelper {
+public class ChemicalOxidizerCategory implements DisplayCategory<ItemStackToGasRecipeDisplay>, IGuiHelper {
 
     @Override
-    public CategoryIdentifier<? extends ChemicalOxidizerDisplay> getCategoryIdentifier() {
+    public CategoryIdentifier<? extends ItemStackToGasRecipeDisplay> getCategoryIdentifier() {
         return Categories.CHEMICAL_OXIDIZER;
     }
 
@@ -33,7 +33,7 @@ public class ChemicalOxidizerCategory implements DisplayCategory<ChemicalOxidize
     }
 
     @Override
-    public List<Widget> setupDisplay(ChemicalOxidizerDisplay display, Rectangle bounds) {
+    public List<Widget> setupDisplay(ItemStackToGasRecipeDisplay display, Rectangle bounds) {
         List<Widget> widgets = new ObjectArrayList<>();
         GuiHelper.createRecipeBase(widgets, bounds);
         GuiHelper.addInputSlotElement(widgets, adjustedInputPoint(bounds), EntryIngredients.ofItemStacks(display.recipe().getInput().getRepresentations()), GuiElements.INPUT);
@@ -43,7 +43,7 @@ public class ChemicalOxidizerCategory implements DisplayCategory<ChemicalOxidize
     }
 
     @Override
-    public int getDisplayWidth(ChemicalOxidizerDisplay display) {
+    public int getDisplayWidth(ItemStackToGasRecipeDisplay display) {
         return 96;
     }
 

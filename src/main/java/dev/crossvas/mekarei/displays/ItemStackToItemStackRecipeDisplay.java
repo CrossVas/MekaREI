@@ -1,6 +1,5 @@
 package dev.crossvas.mekarei.displays;
 
-import dev.crossvas.mekarei.utils.Categories;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
@@ -9,17 +8,19 @@ import mekanism.api.recipes.ItemStackToItemStackRecipe;
 
 import java.util.List;
 
-public class EnricherDisplay extends BasicDisplay {
+public class ItemStackToItemStackRecipeDisplay extends BasicDisplay {
 
     ItemStackToItemStackRecipe RECIPE;
+    CategoryIdentifier<?> ID;
 
-    public EnricherDisplay(ItemStackToItemStackRecipe recipe) {
+    public ItemStackToItemStackRecipeDisplay(ItemStackToItemStackRecipe recipe, CategoryIdentifier<?> id) {
         this(List.of(EntryIngredients.ofItemStacks(recipe.getInput().getRepresentations())),
                 List.of(EntryIngredients.ofItemStacks(recipe.getOutputDefinition())));
         this.RECIPE = recipe;
+        this.ID = id;
     }
 
-    public EnricherDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+    public ItemStackToItemStackRecipeDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
         super(inputs, outputs);
     }
 
@@ -29,6 +30,6 @@ public class EnricherDisplay extends BasicDisplay {
 
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier() {
-        return Categories.ENRICHMENT;
+        return this.ID;
     }
 }

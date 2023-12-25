@@ -1,6 +1,6 @@
 package dev.crossvas.mekarei.categories;
 
-import dev.crossvas.mekarei.displays.CrusherDisplay;
+import dev.crossvas.mekarei.displays.ItemStackToItemStackRecipeDisplay;
 import dev.crossvas.mekarei.utils.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.shedaniel.math.Rectangle;
@@ -15,10 +15,10 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class CrusherCategory implements DisplayCategory<CrusherDisplay>, IGuiHelper {
+public class CrusherCategory implements DisplayCategory<ItemStackToItemStackRecipeDisplay>, IGuiHelper {
 
     @Override
-    public CategoryIdentifier<? extends CrusherDisplay> getCategoryIdentifier() {
+    public CategoryIdentifier<? extends ItemStackToItemStackRecipeDisplay> getCategoryIdentifier() {
         return Categories.CRUSHER;
     }
 
@@ -33,7 +33,7 @@ public class CrusherCategory implements DisplayCategory<CrusherDisplay>, IGuiHel
     }
 
     @Override
-    public List<Widget> setupDisplay(CrusherDisplay display, Rectangle bounds) {
+    public List<Widget> setupDisplay(ItemStackToItemStackRecipeDisplay display, Rectangle bounds) {
         List<Widget> widgets = new ObjectArrayList<>();
         GuiHelper.createRecipeBase(widgets, bounds);
         GuiHelper.addInputSlotElement(widgets, adjustedInputPoint(bounds), EntryIngredients.ofItemStacks(display.recipe().getInput().getRepresentations()), GuiElements.INPUT);
@@ -43,7 +43,7 @@ public class CrusherCategory implements DisplayCategory<CrusherDisplay>, IGuiHel
     }
 
     @Override
-    public int getDisplayWidth(CrusherDisplay display) {
+    public int getDisplayWidth(ItemStackToItemStackRecipeDisplay display) {
         return defaultWidth;
     }
 

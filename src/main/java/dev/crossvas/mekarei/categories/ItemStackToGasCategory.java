@@ -1,6 +1,6 @@
 package dev.crossvas.mekarei.categories;
 
-import dev.crossvas.mekarei.displays.ItemStackToGasDisplay;
+import dev.crossvas.mekarei.displays.ItemStackToGasRecipeDisplay;
 import dev.crossvas.mekarei.utils.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.shedaniel.math.Rectangle;
@@ -15,10 +15,10 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class ItemStackToGasCategory implements DisplayCategory<ItemStackToGasDisplay>, IGuiHelper {
+public class ItemStackToGasCategory implements DisplayCategory<ItemStackToGasRecipeDisplay>, IGuiHelper {
 
     @Override
-    public CategoryIdentifier<? extends ItemStackToGasDisplay> getCategoryIdentifier() {
+    public CategoryIdentifier<? extends ItemStackToGasRecipeDisplay> getCategoryIdentifier() {
         return Categories.ITEM_TO_GAS;
     }
 
@@ -33,7 +33,7 @@ public class ItemStackToGasCategory implements DisplayCategory<ItemStackToGasDis
     }
 
     @Override
-    public List<Widget> setupDisplay(ItemStackToGasDisplay display, Rectangle bounds) {
+    public List<Widget> setupDisplay(ItemStackToGasRecipeDisplay display, Rectangle bounds) {
         List<Widget> widgets = new ObjectArrayList<>();
         GuiHelper.createRecipeBase(widgets, bounds);
         GuiHelper.addInputSlotElement(widgets, adjustedInputPoint(bounds), EntryIngredients.ofItemStacks(display.recipe().getInput().getRepresentations()), GuiElements.INPUT);
@@ -43,7 +43,7 @@ public class ItemStackToGasCategory implements DisplayCategory<ItemStackToGasDis
     }
 
     @Override
-    public int getDisplayWidth(ItemStackToGasDisplay display) {
+    public int getDisplayWidth(ItemStackToGasRecipeDisplay display) {
         return 120;
     }
 

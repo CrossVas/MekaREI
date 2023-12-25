@@ -1,6 +1,6 @@
 package dev.crossvas.mekarei.categories;
 
-import dev.crossvas.mekarei.displays.SolarNeutronDisplay;
+import dev.crossvas.mekarei.displays.GasToGasRecipeDisplay;
 import dev.crossvas.mekarei.utils.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.shedaniel.math.Rectangle;
@@ -14,10 +14,10 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class SolarNeutronCategory implements DisplayCategory<SolarNeutronDisplay>, IGuiHelper {
+public class SolarNeutronCategory implements DisplayCategory<GasToGasRecipeDisplay>, IGuiHelper {
 
     @Override
-    public CategoryIdentifier<? extends SolarNeutronDisplay> getCategoryIdentifier() {
+    public CategoryIdentifier<? extends GasToGasRecipeDisplay> getCategoryIdentifier() {
         return Categories.SOLAR_NEUTRON;
     }
 
@@ -32,7 +32,7 @@ public class SolarNeutronCategory implements DisplayCategory<SolarNeutronDisplay
     }
 
     @Override
-    public List<Widget> setupDisplay(SolarNeutronDisplay display, Rectangle bounds) {
+    public List<Widget> setupDisplay(GasToGasRecipeDisplay display, Rectangle bounds) {
         List<Widget> widgets = new ObjectArrayList<>();
         GuiHelper.createRecipeBase(widgets, bounds);
 
@@ -44,7 +44,7 @@ public class SolarNeutronCategory implements DisplayCategory<SolarNeutronDisplay
     }
 
     @Override
-    public int getDisplayWidth(SolarNeutronDisplay display) {
+    public int getDisplayWidth(GasToGasRecipeDisplay display) {
         return 120;
     }
 

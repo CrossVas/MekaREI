@@ -163,29 +163,30 @@ public class MekaREIPluginClient implements REIClientPlugin {
         RECIPES.getAllRecipesFor(MekanismRecipeType.CRYSTALLIZING.get()).forEach(recipe -> registry.add(new CrystallizerDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.DISSOLUTION.get()).forEach(recipe -> registry.add(new ChemicalDissolutionDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.CHEMICAL_INFUSING.get()).forEach(recipe -> registry.add(new ChemicalInfuserDisplay(recipe)));
-        RECIPES.getAllRecipesFor(MekanismRecipeType.INJECTING.get()).forEach(recipe -> registry.add(new ChemicalInjectorDisplay(recipe)));
-        RECIPES.getAllRecipesFor(MekanismRecipeType.OXIDIZING.get()).forEach(recipe -> registry.add(new ChemicalOxidizerDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.WASHING.get()).forEach(recipe -> registry.add(new ChemicalWasherDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.COMBINING.get()).forEach(recipe -> registry.add(new CombinerDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.ROTARY.get()).forEach(recipe -> registry.add(new CondensentratorDisplay(recipe, true)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.ROTARY.get()).forEach(recipe -> registry.add(new CondensentratorDisplay(recipe, false)));
-        RECIPES.getAllRecipesFor(MekanismRecipeType.CRUSHING.get()).forEach(recipe -> registry.add(new CrusherDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.SEPARATING.get()).forEach(recipe -> registry.add(new ElectrolyticSeparatorDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.ENERGY_CONVERSION.get()).forEach(recipe -> registry.add(new ItemStackToEnergyDisplay(recipe)));
-        RECIPES.getAllRecipesFor(MekanismRecipeType.ENRICHING.get()).forEach(recipe -> registry.add(new EnricherDisplay(recipe)));
-        RECIPES.getAllRecipesFor(MekanismRecipeType.GAS_CONVERSION.get()).forEach(recipe -> registry.add(new ItemStackToGasDisplay(recipe)));
-        RECIPES.getAllRecipesFor(MekanismRecipeType.CENTRIFUGING.get()).forEach(recipe -> registry.add(new IsotopicCentrifugeDisplay(recipe)));
         NutritionalLiquificationCategory.getRecipes().forEach(recipe -> registry.add(new NutritionalLiquificationDisplay(recipe)));
-        RECIPES.getAllRecipesFor(MekanismRecipeType.COMPRESSING.get()).forEach(recipe -> registry.add(new OsmiumCompressorDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.PAINTING.get()).forEach(recipe -> registry.add(new PaintingMachineDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.PIGMENT_EXTRACTING.get()).forEach(recipe -> registry.add(new PigmentExtractorDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.PIGMENT_MIXING.get()).forEach(recipe -> registry.add(new PigmentMixerDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.SAWING.get()).forEach(recipe -> registry.add(new SawmillDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.REACTION.get()).forEach(recipe -> registry.add(new PressurizedChamberDisplay(recipe)));
-        RECIPES.getAllRecipesFor(MekanismRecipeType.PURIFYING.get()).forEach(recipe -> registry.add(new PurificationChamberDisplay(recipe)));
-        RECIPES.getAllRecipesFor(MekanismRecipeType.ACTIVATING.get()).forEach(recipe -> registry.add(new SolarNeutronDisplay(recipe)));
         SPSCategory.getSPSRecipes().forEach(recipe -> registry.add(new SPSDisplay(recipe)));
         RECIPES.getAllRecipesFor(MekanismRecipeType.EVAPORATING.get()).forEach(recipe -> registry.add(new ThermalEvaporationDisplay(recipe)));
+
+        RECIPES.getAllRecipesFor(MekanismRecipeType.CENTRIFUGING.get()).forEach(recipe -> registry.add(new GasToGasRecipeDisplay(recipe, Categories.ISOTOPIC_CENTRIFUGE)));
+        RECIPES.getAllRecipesFor(MekanismRecipeType.ACTIVATING.get()).forEach(recipe -> registry.add(new GasToGasRecipeDisplay(recipe, Categories.SOLAR_NEUTRON)));
+        RECIPES.getAllRecipesFor(MekanismRecipeType.OXIDIZING.get()).forEach(recipe -> registry.add(new ItemStackToGasRecipeDisplay(recipe, Categories.CHEMICAL_OXIDIZER)));
+        RECIPES.getAllRecipesFor(MekanismRecipeType.GAS_CONVERSION.get()).forEach(recipe -> registry.add(new ItemStackToGasRecipeDisplay(recipe, Categories.ITEM_TO_GAS)));
+        RECIPES.getAllRecipesFor(MekanismRecipeType.COMPRESSING.get()).forEach(recipe -> registry.add(new ItemStackGasToItemStackRecipeDisplay(recipe, Categories.OSMIUM_COMPRESSOR)));
+        RECIPES.getAllRecipesFor(MekanismRecipeType.PURIFYING.get()).forEach(recipe -> registry.add(new ItemStackGasToItemStackRecipeDisplay(recipe, Categories.PURIFICATION_CHAMBER)));
+        RECIPES.getAllRecipesFor(MekanismRecipeType.INJECTING.get()).forEach(recipe -> registry.add(new ItemStackGasToItemStackRecipeDisplay(recipe, Categories.CHEMICAL_INJECTOR)));
+        RECIPES.getAllRecipesFor(MekanismRecipeType.CRUSHING.get()).forEach(recipe -> registry.add(new ItemStackToItemStackRecipeDisplay(recipe, Categories.CRUSHER)));
+        RECIPES.getAllRecipesFor(MekanismRecipeType.ENRICHING.get()).forEach(recipe -> registry.add(new ItemStackToItemStackRecipeDisplay(recipe, Categories.ENRICHMENT)));
     }
 
     @Override

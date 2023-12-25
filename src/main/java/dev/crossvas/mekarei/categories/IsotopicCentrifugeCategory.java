@@ -1,6 +1,6 @@
 package dev.crossvas.mekarei.categories;
 
-import dev.crossvas.mekarei.displays.IsotopicCentrifugeDisplay;
+import dev.crossvas.mekarei.displays.GasToGasRecipeDisplay;
 import dev.crossvas.mekarei.utils.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.shedaniel.math.Rectangle;
@@ -14,10 +14,10 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public class IsotopicCentrifugeCategory implements DisplayCategory<IsotopicCentrifugeDisplay>, IGuiHelper {
+public class IsotopicCentrifugeCategory implements DisplayCategory<GasToGasRecipeDisplay>, IGuiHelper {
 
     @Override
-    public CategoryIdentifier<? extends IsotopicCentrifugeDisplay> getCategoryIdentifier() {
+    public CategoryIdentifier<? extends GasToGasRecipeDisplay> getCategoryIdentifier() {
         return Categories.ISOTOPIC_CENTRIFUGE;
     }
 
@@ -32,7 +32,7 @@ public class IsotopicCentrifugeCategory implements DisplayCategory<IsotopicCentr
     }
 
     @Override
-    public List<Widget> setupDisplay(IsotopicCentrifugeDisplay display, Rectangle bounds) {
+    public List<Widget> setupDisplay(GasToGasRecipeDisplay display, Rectangle bounds) {
         List<Widget> widgets = new ObjectArrayList<>();
         GuiHelper.createRecipeBase(widgets, bounds);
 
@@ -44,7 +44,7 @@ public class IsotopicCentrifugeCategory implements DisplayCategory<IsotopicCentr
     }
 
     @Override
-    public int getDisplayWidth(IsotopicCentrifugeDisplay display) {
+    public int getDisplayWidth(GasToGasRecipeDisplay display) {
         return 120;
     }
 

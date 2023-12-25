@@ -1,7 +1,7 @@
 package dev.crossvas.mekarei.categories;
 
 import dev.crossvas.mekarei.MekaREI;
-import dev.crossvas.mekarei.displays.ChemicalInjectorDisplay;
+import dev.crossvas.mekarei.displays.ItemStackGasToItemStackRecipeDisplay;
 import dev.crossvas.mekarei.utils.*;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.shedaniel.math.Point;
@@ -19,10 +19,10 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class ChemicalInjectorCategory implements DisplayCategory<ChemicalInjectorDisplay>, IGuiHelper {
+public class ChemicalInjectorCategory implements DisplayCategory<ItemStackGasToItemStackRecipeDisplay>, IGuiHelper {
 
     @Override
-    public CategoryIdentifier<? extends ChemicalInjectorDisplay> getCategoryIdentifier() {
+    public CategoryIdentifier<? extends ItemStackGasToItemStackRecipeDisplay> getCategoryIdentifier() {
         return Categories.CHEMICAL_INJECTOR;
     }
 
@@ -37,7 +37,7 @@ public class ChemicalInjectorCategory implements DisplayCategory<ChemicalInjecto
     }
 
     @Override
-    public List<Widget> setupDisplay(ChemicalInjectorDisplay display, Rectangle bounds) {
+    public List<Widget> setupDisplay(ItemStackGasToItemStackRecipeDisplay display, Rectangle bounds) {
         List<Widget> widgets = new ObjectArrayList<>();
         // chemical input
         List<ItemStack> chemicalProviders = new ObjectArrayList<>();
@@ -58,7 +58,7 @@ public class ChemicalInjectorCategory implements DisplayCategory<ChemicalInjecto
     }
 
     @Override
-    public int getDisplayWidth(ChemicalInjectorDisplay display) {
+    public int getDisplayWidth(ItemStackGasToItemStackRecipeDisplay display) {
         return defaultWidth;
     }
 
